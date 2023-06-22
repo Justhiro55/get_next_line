@@ -6,7 +6,7 @@
 /*   By: hhagiwar <hhagiwar@student.42Tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 16:29:13 by hhagiwar          #+#    #+#             */
-/*   Updated: 2023/06/22 15:39:30 by hhagiwar         ###   ########.fr       */
+/*   Updated: 2023/06/22 17:52:59 by hhagiwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*rememo(char *memo)
 {
-	int	i;
-	int	j;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	j = 0;
@@ -37,8 +37,8 @@ char	*rememo(char *memo)
 
 char	*get_ans(char *memo)
 {
-	int		i;
-	int		j;
+	size_t		i;
+	size_t		j;
 	char	*ans;
 
 	i = 0;
@@ -72,9 +72,7 @@ char	*get_memo(int fd, char *memo)
 	{
 		done = read(fd, buf, BUFFER_SIZE);
 		if (done == -1)
-		{
 			return (NULL);
-		}
 		if (memo == NULL)
 			*memo = '\0';
 		buf[done] = '\0';
@@ -96,62 +94,59 @@ char	*get_next_line(int fd)
 	if (memo == NULL)
 		return (NULL);
 	memo = get_memo(fd, memo);
-	printf("check : get_memo\n%s\n\n", memo);
 	ans = get_ans(memo);
-	printf("check : get_ans\n%s\n\n", ans);
 	memo = rememo(memo);
-	printf("check : rememo\n%s\n\n------------------------------------------\n",
-			memo);
 	return (ans);
 }
 
-__attribute__((destructor)) static void destructor()
-{
-	system("leaks -q a.out");
-}
+// __attribute__((destructor)) static void destructor()
+// {
+// 	system("leaks -q a.out");
+// }
 
-int	main(void)
-{
-	int		fd;
-	char	*line1;
-	char	*line2;
-	char	*line3;
-	char	*line4;
+// int	main(void)
+// {
+// 	int		fd1;
+// 	char	*line1;
+// 	char	*line2;
+// 	char	*line3;
+// 	char	*line4;
 
-	fd = open("test.txt", O_RDONLY);
-	if (fd == -1)
-	{
-		printf("Failed to open file.\n");
-		return (-1);
-	}
-	line1 = get_next_line(fd);
-	if (line1 != NULL)
-	{
-		printf("Line read1:%s\n-----------------------------------------------------------\n",
-				line1);
-		free(line1);
-	}
-	line2 = get_next_line(fd);
-	if (line2 != NULL)
-	{
-		printf("Line read2:%s\n-----------------------------------------------------------\n",
-				line2);
-		free(line2);
-	}
-	line3 = get_next_line(fd);
-	if (line3 != NULL)
-	{
-		printf("Line read2:%s\n-----------------------------------------------------------\n",
-				line3);
-		free(line3);
-	}
-	line4 = get_next_line(fd);
-	if (line4 != NULL)
-	{
-		printf("Line read2:%s\n-----------------------------------------------------------\n",
-				line4);
-		free(line4);
-	}
-	close(fd);
-	return (0);
-}
+// 	fd1 = open("test1.txt", O_RDONLY);
+// 	printf("%d\n", fd1);
+// 	if (fd1 == -1)
+// 	{
+// 		printf("Failed to open file.\n");
+// 		return (-1);
+// 	}
+// 	line1 = get_next_line(fd1);
+// 	if (line1 != NULL)
+// 	{
+// 		printf("Line read1:%s\n-----------------------------------------------------------\n",
+// 				line1);
+// 		free(line1);
+// 	}
+// 	line2 = get_next_line(fd1);
+// 	if (line2 != NULL)
+// 	{
+// 		printf("Line read2:%s\n-----------------------------------------------------------\n",
+// 				line2);
+// 		free(line2);
+// 	}
+// 	line3 = get_next_line(fd1);
+// 	if (line3 != NULL)
+// 	{
+// 		printf("Line read2:%s\n-----------------------------------------------------------\n",
+// 				line3);
+// 		free(line3);
+// 	}
+// 	line4 = get_next_line(fd1);
+// 	if (line4 != NULL)
+// 	{
+// 		printf("Line read2:%s\n-----------------------------------------------------------\n",
+// 				line4);
+// 		free(line4);
+// 	}
+// 	close(fd1);
+// 	return (0);
+// }
