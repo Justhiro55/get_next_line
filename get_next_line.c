@@ -6,7 +6,7 @@
 /*   By: hhagiwar <hhagiwar@student.42Tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 16:29:13 by hhagiwar          #+#    #+#             */
-/*   Updated: 2023/06/23 14:16:10 by hhagiwar         ###   ########.fr       */
+/*   Updated: 2023/06/23 16:28:27 by hhagiwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*get_memo(int fd, char *memo)
 	ssize_t	done;
 
 	done = 1;
-	buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	buf = (char *)malloc((BUFFER_SIZE + 2) * sizeof(char));
 	if (buf == NULL)
 		return (NULL);
 	while (done > 0 && ft_strchr(memo, '\n') == 0)
@@ -73,8 +73,8 @@ char	*get_memo(int fd, char *memo)
 		done = read(fd, buf, BUFFER_SIZE);
 		if (done == -1 || buf[0] == '\0')
 		{
-			free(buf);
 			buf = NULL;
+			free(buf);
 			return (NULL);
 		}
 		if (memo == NULL || memo[0] == '\0')
@@ -92,12 +92,12 @@ char	*get_next_line(int fd)
 	static char	*memo;
 	char		*ans;
 
-	if (BUFFER_SIZE < 0 || fd < 0)
+	if (BUFFER_SIZE < 0 || fd < 0 || read(fd, 0, 0) < 0)
 		return (NULL);
 	if (memo == NULL)
-		memo = (char *)malloc((30) * sizeof(char));
+		memo = (char *)malloc((300) * sizeof(char));
 	if (memo == NULL)
-		return (NULL);
+		return (memo);
 	memo = get_memo(fd, memo);
 	if (memo == NULL)
 		return (NULL);
