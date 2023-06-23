@@ -6,7 +6,7 @@
 /*   By: hhagiwar <hhagiwar@student.42Tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:53:24 by hhagiwar          #+#    #+#             */
-/*   Updated: 2023/06/22 17:57:16 by hhagiwar         ###   ########.fr       */
+/*   Updated: 2023/06/23 11:05:52 by hhagiwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,65 +99,4 @@ char	*get_next_line(int fd)
 	ans = get_ans(memo[i]);
 	memo[i] = rememo(memo[i]);
 	return (ans);
-}
-
-__attribute__((destructor)) static void destructor()
-{
-	system("leaks -q a.out");
-}
-
-int	main(void)
-{
-	int		fd1;
-	int		fd2;
-	int		fd3;
-	int		i;
-	char	*line1;
-	char	*line2;
-	char	*line3;
-		// char *line1;
-		// char *line2;
-
-	i = 20;
-	fd1 = open("test1.txt", O_RDONLY);
-	fd2 = open("test2.txt", O_RDONLY);
-	fd3 = open("test3.txt", O_RDONLY);
-	// printf("fd1:%d, fd2:%d\n\n", fd1, fd2);
-	printf("\n===========================================================\n\n");
-	while (i-- > 0)
-	{
-		char *line1;
-		line1 = get_next_line(fd1);
-        if(line1 != NULL)
-    		printf("Line read:%s\n-------------------------------------\n",
-				line1);
-		free(line1);
-	}
-	printf("\n");
-	i = 10;
-	while (i-- > 0)
-	{
-		char *line2;
-		line2 = get_next_line(fd2);
-		printf("Line read:%s\n-------------------------------------\n", line2);
-		free(line2);
-	}
-	printf("\n");
-	i = 10;
-	while (i-- > 0)
-	{
-		char *line3;
-		line3 = get_next_line(fd3);
-		printf("Line read:%s\n-------------------------------------\n", line3);
-		free(line3);
-	}
-	printf("\n===========================================================\n");
-
-	free(line1);
-	free(line2);
-	free(line3);
-	close(fd1);
-	close(fd2);
-	close(fd3);
-	return (0);
 }

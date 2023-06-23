@@ -6,7 +6,7 @@
 /*   By: hhagiwar <hhagiwar@student.42Tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 16:29:11 by hhagiwar          #+#    #+#             */
-/*   Updated: 2023/06/22 17:50:51 by hhagiwar         ###   ########.fr       */
+/*   Updated: 2023/06/23 13:27:53 by hhagiwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 20
+#  define BUFFER_SIZE 1
 # endif
 
 # include <fcntl.h>
@@ -29,5 +29,6 @@ char	*get_next_line(int fd);
 char	*ft_strchr(const char *s, int c);
 size_t	ft_strlen(const char *s);
 char	*my_strjoin(char *s1, char const *s2);
+char	*ft_strdup(const char *src);
 
 #endif

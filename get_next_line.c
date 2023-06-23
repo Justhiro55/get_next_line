@@ -6,7 +6,7 @@
 /*   By: hhagiwar <hhagiwar@student.42Tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 16:29:13 by hhagiwar          #+#    #+#             */
-/*   Updated: 2023/06/22 17:52:59 by hhagiwar         ###   ########.fr       */
+/*   Updated: 2023/06/23 14:16:10 by hhagiwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ char	*rememo(char *memo)
 
 char	*get_ans(char *memo)
 {
-	size_t		i;
-	size_t		j;
+	size_t	i;
+	size_t	j;
 	char	*ans;
 
 	i = 0;
@@ -71,14 +71,19 @@ char	*get_memo(int fd, char *memo)
 	while (done > 0 && ft_strchr(memo, '\n') == 0)
 	{
 		done = read(fd, buf, BUFFER_SIZE);
-		if (done == -1)
+		if (done == -1 || buf[0] == '\0')
+		{
+			free(buf);
+			buf = NULL;
 			return (NULL);
-		if (memo == NULL)
+		}
+		if (memo == NULL || memo[0] == '\0')
 			*memo = '\0';
 		buf[done] = '\0';
 		memo = my_strjoin(memo, buf);
 	}
 	free(buf);
+	buf = NULL;
 	return (memo);
 }
 
@@ -87,66 +92,16 @@ char	*get_next_line(int fd)
 	static char	*memo;
 	char		*ans;
 
-	if (BUFFER_SIZE < 0)
+	if (BUFFER_SIZE < 0 || fd < 0)
 		return (NULL);
 	if (memo == NULL)
-		memo = (char *)malloc((100) * sizeof(char));
+		memo = (char *)malloc((30) * sizeof(char));
 	if (memo == NULL)
 		return (NULL);
 	memo = get_memo(fd, memo);
+	if (memo == NULL)
+		return (NULL);
 	ans = get_ans(memo);
 	memo = rememo(memo);
 	return (ans);
 }
-
-// __attribute__((destructor)) static void destructor()
-// {
-// 	system("leaks -q a.out");
-// }
-
-// int	main(void)
-// {
-// 	int		fd1;
-// 	char	*line1;
-// 	char	*line2;
-// 	char	*line3;
-// 	char	*line4;
-
-// 	fd1 = open("test1.txt", O_RDONLY);
-// 	printf("%d\n", fd1);
-// 	if (fd1 == -1)
-// 	{
-// 		printf("Failed to open file.\n");
-// 		return (-1);
-// 	}
-// 	line1 = get_next_line(fd1);
-// 	if (line1 != NULL)
-// 	{
-// 		printf("Line read1:%s\n-----------------------------------------------------------\n",
-// 				line1);
-// 		free(line1);
-// 	}
-// 	line2 = get_next_line(fd1);
-// 	if (line2 != NULL)
-// 	{
-// 		printf("Line read2:%s\n-----------------------------------------------------------\n",
-// 				line2);
-// 		free(line2);
-// 	}
-// 	line3 = get_next_line(fd1);
-// 	if (line3 != NULL)
-// 	{
-// 		printf("Line read2:%s\n-----------------------------------------------------------\n",
-// 				line3);
-// 		free(line3);
-// 	}
-// 	line4 = get_next_line(fd1);
-// 	if (line4 != NULL)
-// 	{
-// 		printf("Line read2:%s\n-----------------------------------------------------------\n",
-// 				line4);
-// 		free(line4);
-// 	}
-// 	close(fd1);
-// 	return (0);
-// }

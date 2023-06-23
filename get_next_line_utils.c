@@ -6,7 +6,7 @@
 /*   By: hhagiwar <hhagiwar@student.42Tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 16:29:17 by hhagiwar          #+#    #+#             */
-/*   Updated: 2023/06/22 17:48:52 by hhagiwar         ###   ########.fr       */
+/*   Updated: 2023/06/23 13:57:03 by hhagiwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ char	*my_strjoin(char *s1, char const *s2)
 	}
 	str[i + j] = '\0';
 	free(s1);
+	s1 = NULL;
 	return (str);
 }
