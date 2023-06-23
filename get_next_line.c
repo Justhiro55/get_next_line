@@ -20,12 +20,15 @@ char	*rememo(char *memo)
 	i = 0;
 	j = 0;
 	while (memo[i] != '\n' && memo[i] != '\0')
-	{
 		i++;
+	if(memo[i] == '\0')
+	{
+		free(memo);
+		return NULL;
 	}
 	if (memo[i] == '\n')
 		i++;
-	while (i < ft_strlen(memo) && memo[i] != '\0')
+	while (memo[i] != '\0')
 	{
 		memo[j] = memo[i];
 		j++;
@@ -43,19 +46,22 @@ char	*get_ans(char *memo)
 
 	i = 0;
 	j = 0;
+	if(!memo[i])
+		return NULL;
 	while (memo[i] != '\n' && memo[i] != '\0')
-	{
 		i++;
-	}
 	ans = (char *)malloc((i + 2) * sizeof(char));
 	if (ans == NULL)
 		return (NULL);
-	while (j < i)
+	while (j < i && memo[j] && memo[j] != '\n')
 	{
 		ans[j] = memo[j];
 		j++;
 	}
-	ans[j] = '\0';
+	if (memo[j] && memo[i] == '\n')
+	{
+		ans[j++] = '\n';
+	}
 	return (ans);
 }
 
