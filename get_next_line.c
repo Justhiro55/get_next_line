@@ -60,8 +60,10 @@ char	*get_ans(char *memo)
 	}
 	if (memo[j] && memo[i] == '\n')
 	{
-		ans[j++] = '\n';
+		ans[j] = '\n';
+		j++;
 	}
+	ans[j] = '\0';
 	return (ans);
 }
 

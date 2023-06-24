@@ -61,5 +61,6 @@ char	*my_strjoin(char *s1, char const *s2)
 	}
 	str[i + j] = '\0';
 	free(s1);
+	s1 = NULL;
 	return (str);
 }

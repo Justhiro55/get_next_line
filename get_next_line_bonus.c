@@ -20,12 +20,15 @@ char	*rememo(char *memo)
 	i = 0;
 	j = 0;
 	while (memo[i] != '\n' && memo[i] != '\0')
-	{
 		i++;
+	if(memo[i] == '\0')
+	{
+		free(memo);
+		return NULL;
 	}
 	if (memo[i] == '\n')
 		i++;
-	while (i < ft_strlen(memo) && memo[i] != '\0')
+	while (memo[i] != '\0')
 	{
 		memo[j] = memo[i];
 		j++;
@@ -43,16 +46,21 @@ char	*get_ans(char *memo)
 
 	i = 0;
 	j = 0;
+	if(!memo[i])
+		return NULL;
 	while (memo[i] != '\n' && memo[i] != '\0')
-	{
 		i++;
-	}
 	ans = (char *)malloc((i + 2) * sizeof(char));
 	if (ans == NULL)
 		return (NULL);
-	while (j < i)
+	while (j < i && memo[j] && memo[j] != '\n')
 	{
 		ans[j] = memo[j];
+		j++;
+	}
+	if (memo[j] && memo[i] == '\n')
+	{
+		ans[j] = '\n';
 		j++;
 	}
 	ans[j] = '\0';
@@ -65,20 +73,25 @@ char	*get_memo(int fd, char *memo)
 	ssize_t	done;
 
 	done = 1;
-	buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	buf = (char *)malloc((BUFFER_SIZE + 2) * sizeof(char));
 	if (buf == NULL)
 		return (NULL);
 	while (done > 0 && ft_strchr(memo, '\n') == 0)
 	{
 		done = read(fd, buf, BUFFER_SIZE);
-		if (done == -1)
+		if (done == -1 || buf[0] == '\0')
+		{
+			buf = NULL;
+			free(buf);
 			return (NULL);
-		if (memo == NULL)
+		}
+		if (memo == NULL || memo[0] == '\0')
 			*memo = '\0';
 		buf[done] = '\0';
 		memo = my_strjoin(memo, buf);
 	}
 	free(buf);
+	buf = NULL;
 	return (memo);
 }
 
@@ -89,13 +102,15 @@ char	*get_next_line(int fd)
 	static size_t	i;
 
 	i = fd - 3;
-	if (BUFFER_SIZE < 0)
+	if (BUFFER_SIZE < 0 || fd < 0 || read(fd, 0, 0) < 0)
 		return (NULL);
 	if (memo[i] == NULL)
-		memo[i] = (char *)malloc((100) * sizeof(char));
+		memo[i] = (char *)malloc((300) * sizeof(char));
 	if (memo[i] == NULL)
 		return (NULL);
 	memo[i] = get_memo(fd, memo[i]);
+	if (memo[i] == NULL)
+		return (NULL);
 	ans = get_ans(memo[i]);
 	memo[i] = rememo(memo[i]);
 	return (ans);
