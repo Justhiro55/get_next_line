@@ -108,6 +108,11 @@ char	*get_next_line(int fd)
 		memo[fd][0] = '\0';
 	}
 	memo[fd] = get_memo(fd, memo[fd]);
+<<<<<<< HEAD
+=======
+	if (memo[0] == NULL)
+		printf("bbbbbb\n");
+>>>>>>> 8b11262bb8aa743dadf3bc28fafdfcb8c54da555
 	if (memo[fd] == NULL)
 		return (NULL);
 	ans = get_ans(memo[fd]);
