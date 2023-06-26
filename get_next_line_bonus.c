@@ -120,7 +120,7 @@ char	*get_next_line(int fd)
 	if (memo[fd] == NULL)
 		return (NULL);
 	memo[fd] = get_memo(fd, memo[fd]);
-	if (memo[0] == '\0')
+	if (memo[0] == NULL)
 		printf("bbbbbb\n");
 	if (memo[fd] == NULL)
 		return (NULL);
