@@ -6,7 +6,7 @@
 /*   By: hhagiwar <hhagiwar@student.42Tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:53:56 by hhagiwar          #+#    #+#             */
-/*   Updated: 2023/06/26 20:24:39 by hhagiwar         ###   ########.fr       */
+/*   Updated: 2023/06/26 14:59:52 by hhagiwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,6 @@
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10000000
-# endif
-
-# ifndef MAX_FD
-#  define MAX_FD 1024
 # endif
 
 # include <fcntl.h>

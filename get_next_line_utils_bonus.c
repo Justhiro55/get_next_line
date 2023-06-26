@@ -6,7 +6,7 @@
 /*   By: hhagiwar <hhagiwar@student.42Tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:54:12 by hhagiwar          #+#    #+#             */
-/*   Updated: 2023/06/26 20:36:13 by hhagiwar         ###   ########.fr       */
+/*   Updated: 2023/06/26 16:02:41 by hhagiwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ char	*my_strjoin(char *s1, char const *s2)
 	i = 0;
 	j = 0;
 	if (s1 == NULL)
-		str = (char *)malloc(sizeof(char) * (ft_strlen(s2) + 1));
+		str = (char *)malloc(sizeof(char) * ft_strlen(s2) + 1);
 	else
 		str = (char *)malloc(sizeof(char) * (ft_strlen((char *)s1)
-					+ ft_strlen((char *)s2) + 2));
+					+ ft_strlen((char *)s2) + 1));
 	while (s1 != NULL && s1[i] != '\0')
 	{
 		str[i] = s1[i];
