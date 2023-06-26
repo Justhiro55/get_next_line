@@ -6,7 +6,7 @@
 /*   By: hhagiwar <hhagiwar@student.42Tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 16:29:11 by hhagiwar          #+#    #+#             */
-/*   Updated: 2023/06/23 13:27:53 by hhagiwar         ###   ########.fr       */
+/*   Updated: 2023/06/26 15:01:19 by hhagiwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 10000000
 # endif
 
 # include <fcntl.h>

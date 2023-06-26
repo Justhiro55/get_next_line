@@ -6,7 +6,7 @@
 /*   By: hhagiwar <hhagiwar@student.42Tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 16:29:13 by hhagiwar          #+#    #+#             */
-/*   Updated: 2023/06/23 16:28:27 by hhagiwar         ###   ########.fr       */
+/*   Updated: 2023/06/26 17:00:08 by hhagiwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ char	*rememo(char *memo)
 	j = 0;
 	while (memo[i] != '\n' && memo[i] != '\0')
 		i++;
-	if(memo[i] == '\0')
+	if (memo[i] == '\0')
 	{
 		free(memo);
-		return NULL;
+		return (NULL);
 	}
 	if (memo[i] == '\n')
 		i++;
@@ -46,8 +46,8 @@ char	*get_ans(char *memo)
 
 	i = 0;
 	j = 0;
-	if(!memo[i])
-		return NULL;
+	if (!memo[i])
+		return (NULL);
 	while (memo[i] != '\n' && memo[i] != '\0')
 		i++;
 	ans = (char *)malloc((i + 2) * sizeof(char));
@@ -81,12 +81,10 @@ char	*get_memo(int fd, char *memo)
 		done = read(fd, buf, BUFFER_SIZE);
 		if (done == -1 || buf[0] == '\0')
 		{
-			buf = NULL;
 			free(buf);
+			free(memo);
 			return (NULL);
 		}
-		if (memo == NULL || memo[0] == '\0')
-			*memo = '\0';
 		buf[done] = '\0';
 		memo = my_strjoin(memo, buf);
 	}
@@ -103,7 +101,7 @@ char	*get_next_line(int fd)
 	if (BUFFER_SIZE < 0 || fd < 0 || read(fd, 0, 0) < 0)
 		return (NULL);
 	if (memo == NULL)
-		memo = (char *)malloc((300) * sizeof(char));
+		memo = (char *)malloc(sizeof(char));
 	if (memo == NULL)
 		return (memo);
 	memo = get_memo(fd, memo);
