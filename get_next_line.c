@@ -6,7 +6,7 @@
 /*   By: hhagiwar <hhagiwar@student.42Tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 16:29:13 by hhagiwar          #+#    #+#             */
-/*   Updated: 2023/06/27 13:20:46 by hhagiwar         ###   ########.fr       */
+/*   Updated: 2023/06/27 18:54:07 by hhagiwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ char	*rememo(char *memo)
 	if (memo[i] == '\0')
 	{
 		free(memo);
+		memo = NULL;
 		return (NULL);
 	}
 	if (memo[i] == '\n')
@@ -52,8 +53,8 @@ char	*get_ans(char *memo)
 		i++;
 	ans = (char *)malloc((i + 2) * sizeof(char));
 	if (ans == NULL)
-		return (NULL);
-	while (j < i && memo[j] && memo[j] != '\n')
+		return (ft_free(memo));
+	while (j < i)
 	{
 		ans[j] = memo[j];
 		j++;
@@ -79,7 +80,7 @@ char	*get_memo(int fd, char *memo)
 	while (done > 0 && ft_strchr(memo, '\n') == 0)
 	{
 		done = read(fd, buf, BUFFER_SIZE);
-		if (done == -1 || buf[0] == '\0')
+		if (done == -1)
 		{
 			free(buf);
 			free(memo);
@@ -87,6 +88,8 @@ char	*get_memo(int fd, char *memo)
 		}
 		buf[done] = '\0';
 		memo = my_strjoin(memo, buf);
+		if (memo == NULL)
+			break ;
 	}
 	free(buf);
 	buf = NULL;
@@ -101,9 +104,12 @@ char	*get_next_line(int fd)
 	if (BUFFER_SIZE <= 0 || fd < 0 || read(fd, 0, 0) < 0)
 		return (NULL);
 	if (memo == NULL)
+	{
 		memo = (char *)malloc(sizeof(char));
-	if (memo == NULL)
-		return (memo);
+		if (memo == NULL)
+			return (NULL);
+		memo[0] = '\0';
+	}
 	memo = get_memo(fd, memo);
 	if (memo == NULL)
 		return (NULL);

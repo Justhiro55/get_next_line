@@ -6,7 +6,7 @@
 /*   By: hhagiwar <hhagiwar@student.42Tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 16:29:11 by hhagiwar          #+#    #+#             */
-/*   Updated: 2023/06/26 15:01:19 by hhagiwar         ###   ########.fr       */
+/*   Updated: 2023/06/27 18:35:02 by hhagiwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ char	*ft_strchr(const char *s, int c);
 size_t	ft_strlen(const char *s);
 char	*my_strjoin(char *s1, char const *s2);
 char	*ft_strdup(const char *src);
+char	*ft_free(char *str);
 
 #endif

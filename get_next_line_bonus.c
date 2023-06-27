@@ -6,7 +6,7 @@
 /*   By: hhagiwar <hhagiwar@student.42Tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:53:24 by hhagiwar          #+#    #+#             */
-/*   Updated: 2023/06/27 13:17:08 by hhagiwar         ###   ########.fr       */
+/*   Updated: 2023/06/27 18:52:38 by hhagiwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@ char	*rememo(char *memo)
 	while (memo[i] != '\n' && memo[i] != '\0')
 		i++;
 	if (memo[i] == '\0')
-	{
-		free(memo);
-		return (NULL);
-	}
+		return (ft_free(memo));
 	if (memo[i] == '\n')
 		i++;
 	while (memo[i] != '\0')
@@ -52,8 +49,8 @@ char	*get_ans(char *memo)
 		i++;
 	ans = (char *)malloc((i + 2) * sizeof(char));
 	if (ans == NULL)
-		return (NULL);
-	while (j < i && memo[j] && memo[j] != '\n')
+		return (ft_free(memo));
+	while (j < i)
 	{
 		ans[j] = memo[j];
 		j++;
@@ -87,6 +84,8 @@ char	*get_memo(int fd, char *memo)
 		}
 		buf[done] = '\0';
 		memo = my_strjoin(memo, buf);
+		if (memo == NULL)
+			break ;
 	}
 	free(buf);
 	buf = NULL;
@@ -98,7 +97,7 @@ char	*get_next_line(int fd)
 	static char	*memo[MAX_FD];
 	char		*ans;
 
-	if (BUFFER_SIZE <= 0 || fd < 0 || read(fd, 0, 0) < 0)
+	if (BUFFER_SIZE <= 0 || fd < 0 || read(fd, 0, 0) < 0 || fd > MAX_FD)
 		return (NULL);
 	if (memo[fd] == NULL)
 	{
