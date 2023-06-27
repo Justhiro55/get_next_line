@@ -6,7 +6,7 @@
 /*   By: hhagiwar <hhagiwar@student.42Tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 16:29:13 by hhagiwar          #+#    #+#             */
-/*   Updated: 2023/06/27 18:54:07 by hhagiwar         ###   ########.fr       */
+/*   Updated: 2023/06/27 18:58:04 by hhagiwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	*get_memo(int fd, char *memo)
 	ssize_t	done;
 
 	done = 1;
-	buf = (char *)malloc((BUFFER_SIZE + 2) * sizeof(char));
+	buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (buf == NULL)
 		return (NULL);
 	while (done > 0 && ft_strchr(memo, '\n') == 0)
