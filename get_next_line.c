@@ -6,7 +6,7 @@
 /*   By: hhagiwar <hhagiwar@student.42Tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 16:29:13 by hhagiwar          #+#    #+#             */
-/*   Updated: 2023/06/26 17:00:08 by hhagiwar         ###   ########.fr       */
+/*   Updated: 2023/06/27 13:20:46 by hhagiwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ char	*get_next_line(int fd)
 	static char	*memo;
 	char		*ans;
 
-	if (BUFFER_SIZE < 0 || fd < 0 || read(fd, 0, 0) < 0)
+	if (BUFFER_SIZE <= 0 || fd < 0 || read(fd, 0, 0) < 0)
 		return (NULL);
 	if (memo == NULL)
 		memo = (char *)malloc(sizeof(char));

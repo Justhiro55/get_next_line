@@ -6,7 +6,7 @@
 /*   By: hhagiwar <hhagiwar@student.42Tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:53:24 by hhagiwar          #+#    #+#             */
-/*   Updated: 2023/06/26 20:55:14 by hhagiwar         ###   ########.fr       */
+/*   Updated: 2023/06/27 13:17:08 by hhagiwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	*get_memo(int fd, char *memo)
 	while (done > 0 && ft_strchr(memo, '\n') == 0)
 	{
 		done = read(fd, buf, BUFFER_SIZE);
-		if (done == -1 || buf[0] == '\0')
+		if (done == -1)
 		{
 			free(buf);
 			free(memo);
@@ -95,15 +95,18 @@ char	*get_memo(int fd, char *memo)
 
 char	*get_next_line(int fd)
 {
-	static char	*memo[OPEN_MAX];
+	static char	*memo[MAX_FD];
 	char		*ans;
 
 	if (BUFFER_SIZE <= 0 || fd < 0 || read(fd, 0, 0) < 0)
 		return (NULL);
 	if (memo[fd] == NULL)
+	{
 		memo[fd] = (char *)malloc(sizeof(char));
-	if (memo[fd] == NULL)
-		return (NULL);
+		if (memo[fd] == NULL)
+			return (NULL);
+		memo[fd][0] = '\0';
+	}
 	memo[fd] = get_memo(fd, memo[fd]);
 	if (memo[fd] == NULL)
 		return (NULL);
