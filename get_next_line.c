@@ -6,7 +6,7 @@
 /*   By: hhagiwar <hhagiwar@student.42Tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 16:29:13 by hhagiwar          #+#    #+#             */
-/*   Updated: 2023/06/27 18:58:04 by hhagiwar         ###   ########.fr       */
+/*   Updated: 2023/06/28 20:09:34 by hhagiwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*get_ans(char *memo)
 		i++;
 	ans = (char *)malloc((i + 2) * sizeof(char));
 	if (ans == NULL)
-		return (ft_free(memo));
+		return (ft_free(&memo));
 	while (j < i)
 	{
 		ans[j] = memo[j];
@@ -114,6 +114,8 @@ char	*get_next_line(int fd)
 	if (memo == NULL)
 		return (NULL);
 	ans = get_ans(memo);
+	if (memo == NULL)
+		return (NULL);
 	memo = rememo(memo);
 	return (ans);
 }

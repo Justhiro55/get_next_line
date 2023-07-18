@@ -6,7 +6,7 @@
 /*   By: hhagiwar <hhagiwar@student.42Tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 16:29:17 by hhagiwar          #+#    #+#             */
-/*   Updated: 2023/06/27 18:46:45 by hhagiwar         ###   ########.fr       */
+/*   Updated: 2023/06/28 20:13:10 by hhagiwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ size_t	ft_strlen(const char *s)
 	return (len);
 }
 
-char	*ft_free(char *str)
+char	*ft_free(char **str)
 {
-	free(str);
-	str = NULL;
+	free(*str);
+	*str = NULL;
 	return (NULL);
 }
 
@@ -54,7 +54,7 @@ char	*my_strjoin(char *s1, char const *s2)
 	j = 0;
 	str = (char *)malloc((ft_strlen((char *)s1) + ft_strlen((char *)s2) + 2));
 	if (str == NULL)
-		return (ft_free(s1));
+		return (ft_free(&s1));
 	while (s1 != NULL && s1[i] != '\0')
 	{
 		str[i] = s1[i];

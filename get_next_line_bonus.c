@@ -6,7 +6,7 @@
 /*   By: hhagiwar <hhagiwar@student.42Tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:53:24 by hhagiwar          #+#    #+#             */
-/*   Updated: 2023/06/27 18:52:38 by hhagiwar         ###   ########.fr       */
+/*   Updated: 2023/07/03 10:56:45 by hhagiwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*rememo(char *memo)
 	while (memo[i] != '\n' && memo[i] != '\0')
 		i++;
 	if (memo[i] == '\0')
-		return (ft_free(memo));
+		return (ft_free(&memo));
 	if (memo[i] == '\n')
 		i++;
 	while (memo[i] != '\0')
@@ -49,7 +49,7 @@ char	*get_ans(char *memo)
 		i++;
 	ans = (char *)malloc((i + 2) * sizeof(char));
 	if (ans == NULL)
-		return (ft_free(memo));
+		return (ft_free(&memo));
 	while (j < i)
 	{
 		ans[j] = memo[j];
@@ -70,7 +70,7 @@ char	*get_memo(int fd, char *memo)
 	ssize_t	done;
 
 	done = 1;
-	buf = (char *)malloc((BUFFER_SIZE + 2) * sizeof(char));
+	buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (buf == NULL)
 		return (NULL);
 	while (done > 0 && ft_strchr(memo, '\n') == 0)
@@ -110,6 +110,8 @@ char	*get_next_line(int fd)
 	if (memo[fd] == NULL)
 		return (NULL);
 	ans = get_ans(memo[fd]);
+	if (memo[fd] == NULL)
+		return (NULL);
 	memo[fd] = rememo(memo[fd]);
 	return (ans);
 }
